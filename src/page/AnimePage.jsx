@@ -7,7 +7,6 @@ const AnimePage = () => {
   const { data, error } = useSWR("https://api.jikan.moe/v4/top/anime", fetcher);
 
   const loading = !data && !error;
-  // if (!data) return null;
 
   return (
     <div className="page-container text-white">

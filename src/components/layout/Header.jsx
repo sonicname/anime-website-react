@@ -1,106 +1,112 @@
+import React from "react";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
 
-const navList = [
+const listNav = [
   {
-    path: "/anime",
+    id: 1,
+    to: "/anime",
     title: "Anime",
   },
   {
-    path: "/genre",
+    id: 2,
+    to: "/genre",
     title: "Genre",
   },
   {
-    path: "/search",
+    id: 3,
+    to: "/search",
     title: "Search",
   },
 ];
 
 const Header = () => {
-  const [open, setOpen] = useState(false);
+  const [show, setShow] = React.useState(false);
   return (
-    <header className="w-full shadow-md">
-      <div className="page-container flex items-center justify-between relative">
-        <NavItem path="/">
-          <span className="font-semibold">Home</span>
-        </NavItem>
-
-        <div className="hidden md:flex gap-x-5">
-          {navList.map((item, index) => (
-            <NavItem key={index} path={item.path}>
-              {item.title}
-            </NavItem>
-          ))}
-        </div>
-
-        <div className="inline md:hidden" onClick={() => setOpen(!open)}>
-          {open ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-white"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-white"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
+    <header className="shadow-md">
+      <div className="page-container">
+        <div className="text-white font-semibold flex items-center justify-between relative p-3">
+          {show && (
+            <div
+              className="fixed inset-0 bg-black bg-opacity-75"
+              onClick={() => setShow(false)}
+            />
           )}
-        </div>
+          <div>
+            <NavLink
+              to={"/"}
+              className={({ isActive }) =>
+                isActive ? "p-3 bg-green-400 rounded-lg" : "p-3 rounded-lg"
+              }
+            >
+              Home
+            </NavLink>
+          </div>
 
-        {open && (
-          <div className="absolute top-full left-0 z-10 bg-slate-900 w-full">
-            <div className="flex flex-col gap-y-3">
-              {navList.map((item, index) => (
+          <ul
+            className={`fixed top-0 flex flex-col w-2/4 h-full bg-slate-800 z-10 transition-all ${
+              show ? "right-0 opacity-100" : "-right-full opacity-0"
+            } md:hidden `}
+          >
+            {listNav.map((item) => (
+              <li className="p-5 mt-10">
                 <NavLink
                   className={({ isActive }) =>
-                    isActive ? `p-3 text-white bg-green-500` : `p-3 text-white`
+                    isActive ? "p-3 bg-green-400 rounded-lg" : "p-3 rounded-lg"
                   }
-                  key={index}
-                  to={item.path}
+                  to={item.to}
+                  key={item.id}
                 >
                   {item.title}
                 </NavLink>
-              ))}
+              </li>
+            ))}
+          </ul>
+
+          <ul className="flex gap-x-3 hidden md:flex">
+            {listNav.map((item) => (
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "p-3 bg-green-400 rounded-lg" : "p-3 rounded-lg"
+                  }
+                  to={item.to}
+                  key={item.id}
+                >
+                  {item.title}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+
+          <div
+            className={`inline-block md:hidden z-[100] ${
+              show && "fixed top-6 right-6"
+            }`}
+          >
+            <div
+              className="relative flex flex-col gap-y-[4px]"
+              onClick={() => setShow(!show)}
+            >
+              <span
+                className={`block w-6 h-[3px] bg-white transition-all ${
+                  show && "rotate-45 translate-y-[7px]"
+                }`}
+              ></span>
+              <span
+                className={`block w-6 h-[3px] bg-white transition-all ${
+                  show && "opacity-0 invisible"
+                }`}
+              ></span>
+              <span
+                className={`block w-6 h-[3px] bg-white transition-all ${
+                  show && "-rotate-45 -translate-y-[7px]"
+                }`}
+              ></span>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </header>
-  );
-};
-
-const NavItem = ({ path, children }) => {
-  return (
-    <NavLink
-      to={`${path}`}
-      className={({ isActive }) =>
-        isActive
-          ? `flex items-center gap-x-2 bg-green-500 p-3 rounded-lg text-white`
-          : `p-3 flex items-center gap-x-2 rounded-lg text-white`
-      }
-    >
-      {children}
-    </NavLink>
   );
 };
 
