@@ -1,5 +1,5 @@
 import React from "react";
-import AnimeList from "../components/Anime/AnimeList";
+import AnimeList from "../components/anime/AnimeList";
 
 const HomePage = () => {
   return (
