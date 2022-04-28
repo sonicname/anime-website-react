@@ -9,11 +9,6 @@ const listNav = [
   },
   {
     id: 2,
-    to: "/genre",
-    title: "Genre",
-  },
-  {
-    id: 3,
     to: "/search",
     title: "Search",
   },
