@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <div className="bg-slate-900">
-      <div className="page-container grid grid-cols-2">
+      <div className="page-container grid grid-cols-1 md:grid-cols-2">
         <div className="text-slate-400 flex flex-col p-3">
           <h4 className="italic">
             “There are no regrets. If one can be proud of one’s life, one should
@@ -14,7 +14,7 @@ const Footer = () => {
           </h4>
         </div>
 
-        <div className="flex flex-col items-end p-3 text-slate-400">
+        <div className="flex flex-col items-start md:items-end p-3 text-slate-400">
           <h4 className="text-xl">Contact</h4>
           <div className="flex items-center gap-x-3 mt-3">
             <svg
