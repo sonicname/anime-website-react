@@ -1,17 +1,28 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.scss";
-import App from "./App";
 import { BrowserRouter } from "react-router-dom";
-import { MangaProvider } from "./context/mangaContext";
+import { ToastContainer } from "react-toastify";
+
+import App from "./App";
+import "./index.scss";
+import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <MangaProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </MangaProvider>
+    <BrowserRouter>
+      <App />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );

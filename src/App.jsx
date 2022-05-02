@@ -1,9 +1,9 @@
 import { Fragment, Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import Main from "./components/layout/Main";
-import "react-toastify/dist/ReactToastify.css";
-import "swiper/css";
 import LoadingComponent from "./components/loading/LoadingComponent";
+
+import "swiper/css";
 
 const HomePage = lazy(() => import("./page/HomePage"));
 const AnimePage = lazy(() => import("./page/AnimePage"));

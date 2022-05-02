@@ -1,11 +1,12 @@
-import React from "react";
+import { useState, useRef } from "react";
 import useSWR from "swr";
 import { fetcher } from "../utils/fetcher";
 import AnimeItem from "../components/anime/AnimeItem";
+import { toast } from "react-toastify";
 
 const SearchPage = () => {
-  const [query, setQuery] = React.useState("naruto");
-  const inputRef = React.useRef(null);
+  const [query, setQuery] = useState("naruto");
+  const inputRef = useRef(null);
 
   const handleSearchBtn = (e) => {
     const searchVal = inputRef.current.value;
@@ -16,6 +17,8 @@ const SearchPage = () => {
     `https://api.jikan.moe/v4/anime?q=${query}`,
     fetcher
   );
+
+  if (error) toast.error("Error! Please try again!");
 
   return (
     <div className="page-container">
@@ -30,13 +33,13 @@ const SearchPage = () => {
           />
           <button
             onClick={handleSearchBtn}
-            className="p-3 bg-purple-600 text-white font-semibold hover:opacity-75 duration-300"
+            className="p-3 bg-purple-600 text-white font-semibold hover:opacity-75 duration-300 active:scale-90"
           >
             Search
           </button>
         </div>
 
-        <div className="grid grid-cols-4 mt-4 gap-5 text-white">
+        <div className="grid grid-cols-2 md:grid-cols-4 mt-4 gap-4 text-white">
           {data &&
             data.data.length > 0 &&
             data.data.map((anime) => (
