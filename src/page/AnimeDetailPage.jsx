@@ -107,7 +107,7 @@ const AnimeDetailPage = () => {
 
               <DetailStatus
                 type={"Duration"}
-                content={duration}
+                content={duration || "Unknown"}
                 className="text-sm"
               />
             </div>
@@ -116,12 +116,12 @@ const AnimeDetailPage = () => {
               <DetailStatus type={"Type"} content={type} className="text-sm" />
               <DetailStatus
                 type={"Source"}
-                content={source}
+                content={source || "Unknown"}
                 className="text-sm"
               />
               <DetailStatus
                 type={"Episodes"}
-                content={episodes}
+                content={episodes || "Unknown"}
                 className="text-sm"
               />
             </div>
