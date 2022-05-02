@@ -40,11 +40,15 @@ const SearchPage = () => {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 mt-4 gap-4 text-white">
-          {data &&
-            data.data.length > 0 &&
+          {data && data.data.length > 0 ? (
             data.data.map((anime) => (
               <AnimeItem key={anime.mal_id} anime={anime} />
-            ))}
+            ))
+          ) : (
+            <div className="text-sm opacity-75 text-red-500">
+              Dont have any add about {query}...
+            </div>
+          )}
         </div>
       </div>
     </div>
