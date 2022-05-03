@@ -43,7 +43,7 @@ const Header = () => {
             } md:hidden `}
           >
             {listNav.map((item) => (
-              <li className="p-5 mt-10">
+              <li key={item.id} className="p-5 mt-10">
                 <NavLink
                   className={({ isActive }) =>
                     isActive ? "p-3 bg-green-400 rounded-lg" : "p-3 rounded-lg"
@@ -59,7 +59,7 @@ const Header = () => {
 
           <ul className="flex gap-x-3 hidden md:flex">
             {listNav.map((item) => (
-              <li>
+              <li key={item.id}>
                 <NavLink
                   className={({ isActive }) =>
                     isActive ? "p-3 bg-green-400 rounded-lg" : "p-3 rounded-lg"

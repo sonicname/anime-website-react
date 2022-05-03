@@ -11,7 +11,7 @@ const HomePage = () => {
           <img
             src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
             alt=""
-            className="rounded-md"
+            className="rounded-md w-full h-full object-cover"
           />
         </div>
       </section>

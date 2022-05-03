@@ -1,5 +1,3 @@
-import React from "react";
-
 const LoadingComponent = () => {
   return (
     <div className="w-screen h-screen bg-gray-400 flex items-center justify-center">

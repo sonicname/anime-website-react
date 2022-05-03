@@ -3,6 +3,7 @@ import useSWR from "swr";
 import { fetcher } from "../utils/fetcher";
 import AnimeItem from "../components/anime/AnimeItem";
 import { toast } from "react-toastify";
+import AnimeItemSkeleton from "../components/anime/AnimeItemSkeleton";
 
 const SearchPage = () => {
   const [query, setQuery] = useState("naruto");
@@ -18,35 +19,43 @@ const SearchPage = () => {
     fetcher
   );
 
+  const loading = !data && !error;
+
   if (error) toast.error("Error! Please try again!");
 
   return (
     <div className="page-container">
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-y-4">
         <div className="flex items-center">
           <input
             type="text"
-            className="flex-1 p-3 font-semibold outline-none"
+            className="flex-1 p-3 font-semibold outline-none rounded-l-md"
             placeholder="Enter your keyword"
             ref={inputRef}
             defaultValue={query}
           />
           <button
             onClick={handleSearchBtn}
-            className="p-3 bg-purple-600 text-white font-semibold hover:opacity-75 duration-300 active:scale-90"
+            className="p-3 bg-purple-600 text-white font-semibold hover:opacity-75 duration-300 active:scale-90 rounded-r-md"
           >
             Search
           </button>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 mt-4 gap-4 text-white">
-          {data && data.data.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-4 mt-4 gap-5 text-white">
+          {loading &&
+            new Array(4)
+              .fill(0)
+              .map((item, index) => <AnimeItemSkeleton key={index} />)}
+          {!loading &&
+            data &&
+            data.data.length > 0 &&
             data.data.map((anime) => (
               <AnimeItem key={anime.mal_id} anime={anime} />
-            ))
-          ) : (
-            <div className="text-sm opacity-75 text-red-500">
-              Dont have any add about {query}...
+            ))}
+          {data && data.data.length <= 0 && (
+            <div className="text-md text-red-500 p-3">
+              Keyword: <span className="font-bold">{query}</span> is empty!
             </div>
           )}
         </div>
