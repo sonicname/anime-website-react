@@ -1,5 +1,3 @@
-import React from "react";
-
 const IconStar = ({ className }) => {
   return (
     <svg

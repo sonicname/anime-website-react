@@ -1,5 +1,3 @@
-import React from "react";
-
 const HomePage = () => {
   return (
     <div className="page-container text-white flex items-center justify-center">

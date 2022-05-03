@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import IconStar from "../icons/IconStar";
 import IconFavorite from "../icons/IconFavorite";

@@ -1,8 +1,9 @@
 import { useState, useRef } from "react";
 import useSWR from "swr";
 import { fetcher } from "../utils/fetcher";
-import AnimeItem from "../components/anime/AnimeItem";
 import { toast } from "react-toastify";
+
+import AnimeItem from "../components/anime/AnimeItem";
 import AnimeItemSkeleton from "../components/anime/AnimeItemSkeleton";
 
 const SearchPage = () => {

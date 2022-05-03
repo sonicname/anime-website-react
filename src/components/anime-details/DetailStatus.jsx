@@ -1,5 +1,3 @@
-import React from "react";
-
 const DetailStatus = ({ type, content, className }) => {
   return (
     <span className={`flex gap-x-2 ${className}`}>

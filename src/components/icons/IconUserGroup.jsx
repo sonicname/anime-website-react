@@ -1,5 +1,3 @@
-import React from "react";
-
 const IconUserGroup = ({ className }) => {
   return (
     <svg

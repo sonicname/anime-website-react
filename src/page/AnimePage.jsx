@@ -1,4 +1,3 @@
-import React from "react";
 import AnimeList from "../components/anime/AnimeList";
 
 const AnimePage = () => {

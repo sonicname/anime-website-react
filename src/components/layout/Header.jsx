@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const listNav = [
@@ -15,7 +15,7 @@ const listNav = [
 ];
 
 const Header = () => {
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
   return (
     <header className="shadow-md">
       <div className="page-container">

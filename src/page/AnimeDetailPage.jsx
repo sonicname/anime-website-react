@@ -2,11 +2,13 @@ import { useParams } from "react-router-dom";
 import useSWR from "swr";
 import { fetcher } from "../utils/fetcher";
 import { toast } from "react-toastify";
+
 import DetailStatus from "../components/anime-details/DetailStatus";
 import IconStar from "../components/icons/IconStar";
 import IconUserGroup from "../components/icons/IconUserGroup";
 import IconFavorite from "../components/icons/IconFavorite";
 import IconRank from "../components/icons/IconRank";
+
 import { getRating } from "../utils/getRating";
 
 const AnimeDetailPage = () => {
