@@ -15,7 +15,7 @@ const AnimePage = () => {
       </section>
 
       <section id="season-upcoming" className="text-white">
-        <h2 className="text-2xl font-semibold mb-3">Season now</h2>
+        <h2 className="text-2xl font-semibold mb-3">Season Upcoming</h2>
         <AnimeList url="https://api.jikan.moe/v4/seasons/upcoming" />
       </section>
     </div>
