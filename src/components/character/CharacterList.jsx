@@ -3,6 +3,7 @@ import useSWR from "swr";
 import { fetcher } from "../../utils/fetcher";
 import { Swiper, SwiperSlide } from "swiper/react";
 import CharacterItem from "./CharacterItem";
+import CharacterItemSkeleton from "./CharacterItemSkeleton";
 
 const CharacterList = ({ url }) => {
   const { data, error } = useSWR(url, fetcher);
@@ -13,6 +14,12 @@ const CharacterList = ({ url }) => {
     <div className="character-list">
       {
         <Swiper grabCursor={"true"} spaceBetween={20} slidesPerView={"auto"}>
+          {loading &&
+            new Array(10).fill(0).map((item, index) => (
+              <SwiperSlide key={index}>
+                <CharacterItemSkeleton />
+              </SwiperSlide>
+            ))}
           {!loading &&
             data &&
             data.data.length > 0 &&

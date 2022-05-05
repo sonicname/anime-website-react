@@ -1,6 +1,6 @@
 const LoadingComponent = () => {
   return (
-    <div className="w-screen h-screen bg-gray-400 flex items-center justify-center">
+    <div className="fixed inset-0 w-screen h-screen bg-gray-400 flex items-center justify-center">
       <div>
         <svg
           role="status"

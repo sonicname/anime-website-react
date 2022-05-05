@@ -12,6 +12,11 @@ const listNav = [
     to: "/search",
     title: "Search",
   },
+  {
+    id: 3,
+    to: "/character",
+    title: "Character",
+  },
 ];
 
 const Header = () => {

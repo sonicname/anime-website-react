@@ -3,12 +3,15 @@ import { Routes, Route } from "react-router-dom";
 import Main from "./components/layout/Main";
 import LoadingComponent from "./components/loading/LoadingComponent";
 
-import "swiper/css";
-
 const HomePage = lazy(() => import("./page/HomePage"));
 const AnimePage = lazy(() => import("./page/AnimePage"));
 const SearchPage = lazy(() => import("./page/SearchPage"));
 const AnimeDetailPage = lazy(() => import("./page/AnimeDetailPage"));
+const CharacterPage = lazy(() => import("./page/CharacterPage"));
+const CharacterDetailPage = lazy(() => import("./page/CharacterDetailPage"));
+const Error404Page = lazy(() => import("./page/Error404Page"));
+
+import "swiper/css";
 
 const App = () => {
   return (
@@ -19,9 +22,15 @@ const App = () => {
             <Route path={"/"} element={<HomePage />} />
             <Route path={"/anime"} element={<AnimePage />} />
             <Route path={"/anime/:animeID"} element={<AnimeDetailPage />} />
+            <Route path={"/character/"} element={<CharacterPage />} />
+            <Route
+              path={"/character/:characterID"}
+              element={<CharacterDetailPage />}
+            />
             <Route path={"/search"} element={<SearchPage />} />
-            <Route path={"*"} element={<HomePage />} />
           </Route>
+
+          <Route path={"*"} element={<Error404Page />} />
         </Routes>
       </Suspense>
     </Fragment>
