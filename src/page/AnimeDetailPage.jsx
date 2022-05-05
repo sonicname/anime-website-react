@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import useSWR from "swr";
 import { fetcher } from "../utils/fetcher";
 import { toast } from "react-toastify";
@@ -10,6 +10,7 @@ import IconFavorite from "../components/icons/IconFavorite";
 import IconRank from "../components/icons/IconRank";
 
 import { getRating } from "../utils/getRating";
+import DetailListItem from "../components/anime-details/DetailListItem";
 
 const AnimeDetailPage = () => {
   const { animeID } = useParams();
@@ -44,12 +45,13 @@ const AnimeDetailPage = () => {
     favorites,
     members,
     rank,
+    genres,
   } = data.data;
 
   return (
     <div className="page-container">
       <div className="text-white grid grid-cols-1 gap-5 md:grid-cols-2">
-        <div className="max-w-[800px] max-h-[600px] mx-auto rounded-lg relative">
+        <div className="max-w-[800px] max-h-[600px] mx-auto rounded-lg">
           <a target="_blank" href={url}>
             <img
               src={images.jpg.large_image_url}
@@ -59,7 +61,7 @@ const AnimeDetailPage = () => {
           </a>
         </div>
         <div className="flex flex-col gap-y-3">
-          <div id="anime-details" className="flex flex-col gap-y-3">
+          <div id="anime-details" className="flex flex-col gap-y-5">
             <div className="flex flex-col gap-y-[4px]">
               <h2 className="font-bold text-2xl">
                 {title} ({year || "Empty year"})
@@ -70,7 +72,7 @@ const AnimeDetailPage = () => {
             </div>
 
             <div className="flex flex-col">
-              <div className="flex items-center gap-x-5">
+              <div className="flex items-center gap-x-4">
                 <div className="flex items-center gap-x-1">
                   <IconRank className={"h-5 w-5 text-cyan-400"} />
                   <span className="font-semibold">{rank || "null"}</span>
@@ -91,11 +93,13 @@ const AnimeDetailPage = () => {
                   <IconUserGroup className={"h-5 w-5 text-blue-400"} />
                 </div>
               </div>
-
-              <div></div>
             </div>
 
-            <div className="text-xl flex gap-x-4">
+            {genres.length > 0 && (
+              <DetailListItem items={genres} title={"Genres"} />
+            )}
+
+            <div className="flex flex-wrap gap-3">
               <DetailStatus
                 type={"Rating"}
                 content={getRating(rating)}
@@ -114,7 +118,7 @@ const AnimeDetailPage = () => {
               />
             </div>
 
-            <div className="flex gap-x-5">
+            <div className="flex flex-wrap gap-3">
               <DetailStatus type={"Type"} content={type} className="text-sm" />
               <DetailStatus
                 type={"Source"}
@@ -129,10 +133,7 @@ const AnimeDetailPage = () => {
             </div>
           </div>
 
-          <div
-            id="anime-content"
-            className="flex-1 mt-auto text-md text-gray-300"
-          >
+          <div id="anime-content" className="text-md text-gray-300">
             <p className="text-justify">
               <span className="font-semibold text-white">Description: </span>
               <span className="text-sm">
