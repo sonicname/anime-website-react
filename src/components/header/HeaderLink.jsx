@@ -6,7 +6,7 @@ const HeaderLink = ({ to, children }) => {
     <li className="p-3 font-semibold">
       <NavLink
         className={({ isActive }) =>
-          isActive ? "p-3 bg-green-500 text-white rounded-lg" : "p-3 rounded-lg"
+          `p-3 ${isActive && "bg-green-500"} text-white rounded-lg`
         }
         to={to}
       >
