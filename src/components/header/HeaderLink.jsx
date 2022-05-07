@@ -1,7 +1,6 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 
-const HeaderLink = ({ to, children }) => {
+const HeaderLink = ({ to, setShow, children }) => {
   return (
     <li className="p-3 font-semibold">
       <NavLink
@@ -9,6 +8,7 @@ const HeaderLink = ({ to, children }) => {
           `p-3 ${isActive && "bg-green-500"} text-white rounded-lg`
         }
         to={to}
+        onClick={() => setShow(false)}
       >
         {children}
       </NavLink>

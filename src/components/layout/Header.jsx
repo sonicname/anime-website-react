@@ -1,8 +1,7 @@
-import React from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import HeaderLink from "../header/HeaderLink";
-import IconMenu from "../icons/IconMenu";
-import IconClose from "../icons/IconClose";
+import HeaderHamburger from "../header/HeaderHamburger";
 
 const linkList = [
   {
@@ -23,7 +22,7 @@ const linkList = [
 ];
 
 const Header = () => {
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
   return (
     <header className="w-full bg-slate-900 text-white select-none fixed z-50">
       <div className="page-container flex items-center justify-between relative">
@@ -33,15 +32,14 @@ const Header = () => {
           }
           to={"/"}
         >
-          <h1 className="font-bold text-2xl">Home</h1>
+          <h1 className="font-bold text-xl">Home</h1>
         </NavLink>
 
-        <div onClick={() => setShow(!show)} className="h-8 w-8 lg:hidden">
-          {show ? (
-            <IconClose className={"h-full w-full"} />
-          ) : (
-            <IconMenu className={"h-full w-full"} />
-          )}
+        <div
+          onClick={() => setShow(!show)}
+          className="h-8 w-[40px] flex flex-col items-center justify-between lg:hidden"
+        >
+          <HeaderHamburger show={show} />
         </div>
 
         <ul
@@ -50,7 +48,7 @@ const Header = () => {
           } duration-300 flex flex-col px-1 py-3 gap-y-4 lg:static lg:flex lg:flex-row lg:flex-1 lg:justify-end`}
         >
           {linkList.map((link) => (
-            <HeaderLink key={link.id} to={link.to}>
+            <HeaderLink key={link.id} to={link.to} setShow={setShow}>
               {link.title}
             </HeaderLink>
           ))}
