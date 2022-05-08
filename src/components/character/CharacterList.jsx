@@ -1,4 +1,3 @@
-import React from "react";
 import useSWR from "swr";
 import { fetcher } from "../../utils/fetcher";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -7,7 +6,6 @@ import CharacterItemSkeleton from "./CharacterItemSkeleton";
 
 const CharacterList = ({ url }) => {
   const { data, error } = useSWR(url, fetcher);
-
   const loading = !data && !error;
 
   return (

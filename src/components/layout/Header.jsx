@@ -25,7 +25,7 @@ const Header = () => {
   const [show, setShow] = useState(false);
   return (
     <header className="w-full bg-slate-900 text-white select-none fixed z-50">
-      <div className="page-container flex items-center justify-between relative">
+      <div className="page-container flex items-center justify-between relative z-10">
         <NavLink
           className={({ isActive }) =>
             `p-3 ${isActive && "bg-green-500"} text-white rounded-lg`
@@ -37,7 +37,7 @@ const Header = () => {
 
         <div
           onClick={() => setShow(!show)}
-          className="h-8 w-[40px] flex flex-col items-center justify-between lg:hidden"
+          className="h-8 w-[40px] flex flex-col items-center justify-between lg:hidden z-10"
         >
           <HeaderHamburger show={show} />
         </div>

@@ -1,8 +1,5 @@
-import React from "react";
 import LoadingSkeleton from "../loading/LoadingSkeleton";
-import IconStar from "../icons/IconStar";
 import IconFavorite from "../icons/IconFavorite";
-import Button from "../buttons/Button";
 
 const CharacterItemSkeleton = () => {
   return (
