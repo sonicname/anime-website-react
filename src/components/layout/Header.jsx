@@ -45,7 +45,7 @@ const Header = () => {
         <ul
           className={`absolute top-full right-full w-full bg-slate-900 ${
             show && "!right-0"
-          } duration-300 flex flex-col px-1 py-3 gap-y-4 lg:static lg:flex lg:flex-row lg:flex-1 lg:justify-end`}
+          } duration-300 flex flex-col px-1 py-3 gap-y-4 lg:static lg:p-0 lg:flex lg:flex-row lg:flex-1 lg:justify-end`}
         >
           {linkList.map((link) => (
             <HeaderLink key={link.id} to={link.to} setShow={setShow}>

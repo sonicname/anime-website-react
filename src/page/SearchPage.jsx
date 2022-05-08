@@ -10,11 +10,6 @@ const SearchPage = () => {
   const [query, setQuery] = useState("naruto");
   const inputRef = useRef(null);
 
-  const handleSearchBtn = (e) => {
-    const searchVal = inputRef.current.value;
-    setQuery(searchVal);
-  };
-
   const { data, error } = useSWR(
     `https://api.jikan.moe/v4/anime?q=${query}`,
     fetcher
@@ -36,14 +31,14 @@ const SearchPage = () => {
             defaultValue={query}
           />
           <button
-            onClick={handleSearchBtn}
+            onClick={() => setQuery(inputRef.current.value)}
             className="p-3 bg-purple-600 text-white font-semibold hover:opacity-75 duration-300 active:scale-90 rounded-r-md"
           >
             Search
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 mt-4 gap-5 text-white">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-4 gap-5 text-white">
           {loading &&
             new Array(4)
               .fill(0)

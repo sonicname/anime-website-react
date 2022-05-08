@@ -8,11 +8,6 @@ const CharacterPage = () => {
   const [query, setQuery] = useState("naruto");
   const inputRef = useRef(null);
 
-  const handleSearchBtn = (e) => {
-    const searchVal = inputRef.current.value;
-    setQuery(searchVal);
-  };
-
   const { data, error } = useSWR(
     `https://api.jikan.moe/v4/characters?q=${query}`,
     fetcher
@@ -32,7 +27,7 @@ const CharacterPage = () => {
             defaultValue={query}
           />
           <button
-            onClick={handleSearchBtn}
+            onClick={() => setQuery(inputRef.current.value)}
             className="p-3 bg-purple-600 text-white font-semibold hover:opacity-75 duration-300 active:scale-90 rounded-r-md"
           >
             Search
