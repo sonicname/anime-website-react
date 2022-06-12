@@ -1,7 +1,6 @@
-import { useParams } from "react-router-dom";
 import useSWR from "swr";
+import { useParams } from "react-router-dom";
 import { fetcher } from "../utils/fetcher";
-import { toast } from "react-toastify";
 
 import IconFavorite from "../components/icons/IconFavorite";
 import IconEmail from "../components/icons/IconEmail";
@@ -10,15 +9,10 @@ import LoadingComponent from "../components/loading/LoadingComponent";
 const CharacterDetailPage = () => {
   const { characterID } = useParams();
 
-  const { data, error } = useSWR(
+  const { data } = useSWR(
     `https://api.jikan.moe/v4/characters/${characterID}`,
     fetcher
   );
-
-  if (error) {
-    toast.error("Error! Please Try Again!");
-    return null;
-  }
   if (!data) return <LoadingComponent />;
 
   const { images, name, name_kanji, nicknames, favorites, about, url } =

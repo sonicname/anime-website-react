@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
 import { fetcher } from "../utils/fetcher";
-import { toast } from "react-toastify";
 
 import DetailStatus from "../components/anime-details/DetailStatus";
 import IconStar from "../components/icons/IconStar";
@@ -20,11 +19,6 @@ const AnimeDetailPage = () => {
     `https://api.jikan.moe/v4/anime/${animeID}`,
     fetcher
   );
-
-  if (error) {
-    toast.error("Error! Please Try Again!");
-    return null;
-  }
   if (!data) return <LoadingComponent />;
 
   const {
