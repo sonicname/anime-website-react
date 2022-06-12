@@ -3,6 +3,7 @@ import useSWR from "swr";
 import { fetcher } from "../utils/fetcher";
 import CharacterItem from "../components/character/CharacterItem";
 import CharacterItemSkeleton from "../components/character/CharacterItemSkeleton";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const CharacterPage = () => {
   const [query, setQuery] = useState("naruto");
@@ -34,22 +35,28 @@ const CharacterPage = () => {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 mt-4 gap-5 text-white">
-          {loading &&
-            new Array(4)
-              .fill(0)
-              .map((item, index) => <CharacterItemSkeleton key={index} />)}
-          {!loading &&
-            data &&
-            data.data.length > 0 &&
-            data.data.map((character) => (
-              <CharacterItem key={character.mal_id} character={character} />
-            ))}
-          {data && data.data.length <= 0 && (
-            <div className="text-md text-red-500 p-3">
-              Keyword: <span className="font-bold">{query}</span> is empty!
-            </div>
-          )}
+        <div className="text-white mt-4">
+          <Swiper grabCursor={"true"} spaceBetween={20} slidesPerView={"auto"}>
+            {loading &&
+              new Array(4).fill(0).map((item, index) => (
+                <SwiperSlide key={index}>
+                  <CharacterItemSkeleton />
+                </SwiperSlide>
+              ))}
+            {!loading &&
+              data &&
+              data.data.length > 0 &&
+              data.data.map((character) => (
+                <SwiperSlide key={character.mal_id}>
+                  <CharacterItem key={character.mal_id} character={character} />
+                </SwiperSlide>
+              ))}
+            {data && data.data.length <= 0 && (
+              <div className="text-md text-red-500 p-3">
+                Keyword: <span className="font-bold">{query}</span> is empty!
+              </div>
+            )}
+          </Swiper>
         </div>
       </div>
     </div>

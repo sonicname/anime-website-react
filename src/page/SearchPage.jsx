@@ -1,8 +1,7 @@
-import { useState, useRef } from "react";
 import useSWR from "swr";
+import { useState, useRef } from "react";
 import { fetcher } from "../utils/fetcher";
-import { toast } from "react-toastify";
-
+import { Swiper, SwiperSlide } from "swiper/react";
 import AnimeItem from "../components/anime/AnimeItem";
 import AnimeItemSkeleton from "../components/anime/AnimeItemSkeleton";
 
@@ -16,8 +15,6 @@ const SearchPage = () => {
   );
 
   const loading = !data && !error;
-
-  if (error) toast.error("Error! Please try again!");
 
   return (
     <div className="page-container">
@@ -38,22 +35,28 @@ const SearchPage = () => {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-4 gap-5 text-white">
-          {loading &&
-            new Array(4)
-              .fill(0)
-              .map((item, index) => <AnimeItemSkeleton key={index} />)}
-          {!loading &&
-            data &&
-            data.data.length > 0 &&
-            data.data.map((anime) => (
-              <AnimeItem key={anime.mal_id} anime={anime} />
-            ))}
-          {data && data.data.length <= 0 && (
-            <div className="text-md text-red-500 p-3">
-              Keyword: <span className="font-bold">{query}</span> is empty!
-            </div>
-          )}
+        <div className="text-white mt-4">
+          <Swiper grabCursor={"true"} spaceBetween={20} slidesPerView={"auto"}>
+            {loading &&
+              new Array(4).fill(0).map((item, index) => (
+                <SwiperSlide key={index}>
+                  <AnimeItemSkeleton />
+                </SwiperSlide>
+              ))}
+            {!loading &&
+              data &&
+              data.data.length > 0 &&
+              data.data.map((anime) => (
+                <SwiperSlide key={anime.mal_id}>
+                  <AnimeItem anime={anime} />
+                </SwiperSlide>
+              ))}
+            {data && data.data.length <= 0 && (
+              <div className="text-md text-red-500 p-3">
+                Keyword: <span className="font-bold">{query}</span> is empty!
+              </div>
+            )}
+          </Swiper>
         </div>
       </div>
     </div>

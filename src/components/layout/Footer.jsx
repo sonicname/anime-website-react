@@ -18,12 +18,12 @@ const Footer = () => {
         <div className="flex flex-col items-start md:items-end p-3 text-slate-400">
           <h4 className="text-xl">Contact</h4>
           <div className="flex items-center gap-x-3 mt-3">
-            <IconEmail className={"h-4 w-4"} />
+            <IconEmail className={"h-5 w-5"} />
             <span>Phamanhduc2k2@gmail.com</span>
           </div>
 
           <div className="flex items-center gap-x-3 mt-3">
-            <IconPhone className={"h-4 w-4"} />
+            <IconPhone className={"h-5 w-5"} />
             <span>+8491919191</span>
           </div>
         </div>

@@ -6,7 +6,6 @@ import AnimeItemSkeleton from "./AnimeItemSkeleton";
 
 const AnimeList = ({ url }) => {
   const { data, error } = useSWR(url, fetcher);
-
   const loading = !data && !error;
 
   return (

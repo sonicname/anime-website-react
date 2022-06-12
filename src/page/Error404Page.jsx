@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../components/buttons/Button";
+import errorImg from "../images/404.png";
 
 const Error404Page = () => {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ const Error404Page = () => {
         <div className="max-w-[256px] max-h-[256px] rounded-md">
           <img
             className="w-full h-full object-cover"
-            srcSet="/public/images/404.png 2x"
+            srcSet={errorImg}
             alt=""
           />
         </div>
