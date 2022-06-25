@@ -39,10 +39,10 @@ const SearchContainer = ({ type }) => {
   return (
     <div className="page-container w-full">
       <div className="flex flex-col gap-y-4">
-        <div className="flex items-center">
+        <div className="w-full relative">
           <input
             type="text"
-            className="flex-1 p-3 font-semibold outline-none rounded-l-md"
+            className="p-3 w-full font-semibold outline-none rounded-md"
             placeholder="Enter your keyword"
             ref={inputRef}
             defaultValue={query}
@@ -50,7 +50,7 @@ const SearchContainer = ({ type }) => {
           <button
             ref={searchBtnRef}
             onClick={() => setQuery(inputRef.current.value)}
-            className="p-3 bg-purple-600 text-white font-semibold hover:opacity-75 duration-300 active:scale-90 rounded-r-md"
+            className="p-3 absolute top-0 right-0 bottom-0 bg-purple-600 text-white font-semibold hover:opacity-75 duration-300 active:scale-90 rounded-r-md"
           >
             Search
           </button>
