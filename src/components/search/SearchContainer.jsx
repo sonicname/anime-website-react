@@ -37,7 +37,7 @@ const SearchContainer = ({ type }) => {
   }, []);
 
   return (
-    <div className="page-container">
+    <div className="page-container w-full">
       <div className="flex flex-col gap-y-4">
         <div className="flex items-center">
           <input
