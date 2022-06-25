@@ -4,7 +4,7 @@ import IconPhone from "../icons/IconPhone";
 const Footer = () => {
   return (
     <div className="bg-slate-900">
-      <div className="page-container grid grid-cols-1 md:grid-cols-2 text-[12px] md:text-xl">
+      <div className="page-container grid grid-cols-1 md:grid-cols-2 text-[18px]">
         <div className="text-slate-400 flex-col p-3 hidden md:flex">
           <h4 className="italic">
             “There are no regrets. If one can be proud of one’s life, one should

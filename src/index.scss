@@ -12,8 +12,8 @@
 
   body {
     @apply bg-slate-800;
-    max-height: 100vh;
     height: 100%;
+    overflow-x: hidden;
   }
 
   #root {

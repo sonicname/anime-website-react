@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import HeaderLink from "../header/HeaderLink";
 import HeaderHamburger from "../header/HeaderHamburger";
@@ -23,8 +23,9 @@ const linkList = [
 
 const Header = () => {
   const [show, setShow] = useState(false);
+
   return (
-    <header className="w-full bg-slate-900 text-white select-none fixed z-50">
+    <header className="w-full bg-slate-900 text-white top-0 sticky select-none z-50">
       <div className="page-container flex items-center justify-between relative z-10">
         <NavLink
           className={({ isActive }) =>
