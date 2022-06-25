@@ -8,6 +8,8 @@ const AnimeList = ({ url }) => {
   const { data, error } = useSWR(url, fetcher);
   const loading = !data && !error;
 
+  if (error) console.error(error);
+
   return (
     <div className="anime-list">
       <Swiper grabCursor={"true"} spaceBetween={20} slidesPerView={"auto"}>

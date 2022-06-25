@@ -8,11 +8,11 @@ import LoadingComponent from "../components/loading/LoadingComponent";
 
 const CharacterDetailPage = () => {
   const { characterID } = useParams();
-
-  const { data } = useSWR(
+  const { data, error } = useSWR(
     `https://api.jikan.moe/v4/characters/${characterID}`,
     fetcher
   );
+  if (error) console.error(error);
   if (!data) return <LoadingComponent />;
 
   const { images, name, name_kanji, nicknames, favorites, about, url } =
