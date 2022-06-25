@@ -19,6 +19,7 @@ const AnimeDetailPage = () => {
     `https://api.jikan.moe/v4/anime/${animeID}`,
     fetcher
   );
+
   if (!data) return <LoadingComponent />;
 
   const {
