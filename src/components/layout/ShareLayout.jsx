@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 
-const Main = () => {
+const ShareLayout = () => {
   return (
     <>
       <Header />
@@ -12,4 +12,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default ShareLayout;

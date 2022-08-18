@@ -1,25 +1,32 @@
-import useSWR from "swr";
-import { fetcher } from "../../utils/fetcher";
 import { Swiper, SwiperSlide } from "swiper/react";
 import AnimeItem from "./AnimeItem";
 import AnimeItemSkeleton from "./AnimeItemSkeleton";
+import { getListAnime } from "../../apis/apis";
+import { useQuery } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-const AnimeList = ({ url }) => {
-  const { data, error } = useSWR(url, fetcher);
-  const loading = !data && !error;
+const AnimeList = ({ type }) => {
+  const { data, isError, isLoading } = useQuery(["list-anime", type], () =>
+    getListAnime(type)
+  );
+  const navigate = useNavigate();
 
-  if (error) console.error(error);
+  if (isError) {
+    toast.error("Something went wrong! Please try again!");
+    return navigate("/");
+  }
 
   return (
     <div className="anime-list">
       <Swiper grabCursor={"true"} spaceBetween={20} slidesPerView={"auto"}>
-        {loading &&
+        {isLoading &&
           new Array(10).fill(0).map((item, index) => (
             <SwiperSlide key={index}>
               <AnimeItemSkeleton />
             </SwiperSlide>
           ))}
-        {!loading &&
+        {!isLoading &&
           data &&
           data.data.length > 0 &&
           data.data.map((anime) => (

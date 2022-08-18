@@ -1,6 +1,4 @@
-import { useParams } from "react-router-dom";
-import useSWR from "swr";
-import { fetcher } from "../utils/fetcher";
+import { useNavigate, useParams } from "react-router-dom";
 
 import DetailStatus from "../components/anime-details/DetailStatus";
 import IconStar from "../components/icons/IconStar";
@@ -11,16 +9,23 @@ import IconRank from "../components/icons/IconRank";
 import { getRating } from "../utils/getRating";
 import DetailListItem from "../components/anime-details/DetailListItem";
 import LoadingComponent from "../components/loading/LoadingComponent";
+import { useQuery } from "@tanstack/react-query";
+import { getAnimeDetail } from "../apis/apis";
+import { toast } from "react-toastify";
 
 const AnimeDetailPage = () => {
   const { animeID } = useParams();
+  const navigate = useNavigate();
 
-  const { data, error } = useSWR(
-    `https://api.jikan.moe/v4/anime/${animeID}`,
-    fetcher
+  const { data, error, isLoading } = useQuery(["anime", animeID], () =>
+    getAnimeDetail(animeID)
   );
-  if (error) console.error(error);
-  if (!data) return <LoadingComponent />;
+
+  if (error) {
+    toast.error("Something went wrong! Please try again!");
+    return navigate("/");
+  }
+  if (isLoading) return <LoadingComponent />;
 
   const {
     images,

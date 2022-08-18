@@ -1,26 +1,42 @@
-import useSWR from "swr";
 import AnimeItem from "../anime/AnimeItem";
-import { fetcher } from "../../utils/fetcher";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { useEffect, useRef, useState } from "react";
 import CharacterItem from "../character/CharacterItem";
 import AnimeItemSkeleton from "../anime/AnimeItemSkeleton";
-import CharacterItemSkeleton from "../character/CharacterItemSkeleton";
+import { search } from "../../apis/apis";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { v4 } from "uuid";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import InfiniteScroll from "react-infinite-scroller";
 
 const SearchContainer = ({ type }) => {
+  const navigate = useNavigate();
   const [query, setQuery] = useState("naruto");
   const inputRef = useRef(null);
   const searchBtnRef = useRef(null);
 
-  const url =
-    type === "anime"
-      ? "https://api.jikan.moe/v4/anime"
-      : "https://api.jikan.moe/v4/characters";
+  const url = `https://api.jikan.moe/v4/${type}?q=${query}`;
 
-  const { data, error } = useSWR(`${url}?q=${query}`, fetcher);
+  const { data, hasNextPage, fetchNextPage, isError, isLoading } =
+    useInfiniteQuery(
+      [`search-${type}`, query],
+      ({ pageParam = url }) => search(pageParam),
+      {
+        getNextPageParam: (lastPage, allPages) =>
+          lastPage.pagination.has_next_page
+            ? `${url}&page=${lastPage.pagination.current_page + 1}`
+            : undefined,
+      }
+    );
 
-  if (error) console.error(error);
-  const loading = !data && !error;
+  if (isLoading) {
+    toast.info("Loading...");
+  }
+
+  if (isError) {
+    toast.error("Something went wrong! Please try again!");
+    return navigate("/");
+  }
 
   useEffect(() => {
     const handlerEnterKeyPress = (e) => {
@@ -35,6 +51,8 @@ const SearchContainer = ({ type }) => {
       document.removeEventListener("keyup", handlerEnterKeyPress);
     };
   }, []);
+
+  console.log(data);
 
   return (
     <div className="page-container w-full">
@@ -57,37 +75,29 @@ const SearchContainer = ({ type }) => {
         </div>
 
         <div className="text-white mt-4">
-          <Swiper grabCursor={"true"} spaceBetween={20} slidesPerView={"auto"}>
-            {loading &&
-              new Array(4)
-                .fill(0)
-                .map((item, index) => (
-                  <SwiperSlide key={index}>
-                    {type === "anime" ? (
-                      <AnimeItemSkeleton />
-                    ) : (
-                      <CharacterItemSkeleton />
-                    )}
-                  </SwiperSlide>
-                ))}
-            {!loading &&
-              data &&
-              data.data.length > 0 &&
-              data.data.map((item) => (
-                <SwiperSlide key={item.mal_id}>
-                  {type === "anime" ? (
-                    <AnimeItem anime={item} />
-                  ) : (
-                    <CharacterItem character={item} />
-                  )}
-                </SwiperSlide>
+          {isLoading && (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {new Array(4).fill(0).map(() => (
+                <AnimeItemSkeleton key={v4()} />
               ))}
-            {data && data.data.length <= 0 && (
-              <div className="text-md text-red-500 p-3">
-                Keyword: <span className="font-bold">{query}</span> is empty!
-              </div>
-            )}
-          </Swiper>
+            </div>
+          )}
+          <InfiniteScroll loadMore={fetchNextPage} hasMore={hasNextPage}>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {!isLoading &&
+                data.pages.map((pageData) =>
+                  pageData.data.map((item) => (
+                    <>
+                      {type === "anime" ? (
+                        <AnimeItem anime={item} key={item.mal_id} />
+                      ) : (
+                        <CharacterItem character={item} key={item.mal_id} />
+                      )}
+                    </>
+                  ))
+                )}
+            </div>
+          </InfiniteScroll>
         </div>
       </div>
     </div>

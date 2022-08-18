@@ -1,19 +1,24 @@
-import useSWR from "swr";
-import { useParams } from "react-router-dom";
-import { fetcher } from "../utils/fetcher";
+import { useNavigate, useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 import IconFavorite from "../components/icons/IconFavorite";
 import IconEmail from "../components/icons/IconEmail";
 import LoadingComponent from "../components/loading/LoadingComponent";
+import { getCharacterDetail } from "../apis/apis";
+import { toast } from "react-toastify";
 
 const CharacterDetailPage = () => {
+  const navigate = useNavigate();
   const { characterID } = useParams();
-  const { data, error } = useSWR(
-    `https://api.jikan.moe/v4/characters/${characterID}`,
-    fetcher
+  const { data, isError, isLoading } = useQuery(
+    ["character", characterID],
+    () => getCharacterDetail(characterID)
   );
-  if (error) console.error(error);
-  if (!data) return <LoadingComponent />;
+  if (isError) {
+    toast.error("Something went wrong! Please try again!");
+    return navigate("/");
+  }
+  if (isLoading) return <LoadingComponent />;
 
   const { images, name, name_kanji, nicknames, favorites, about, url } =
     data.data;
