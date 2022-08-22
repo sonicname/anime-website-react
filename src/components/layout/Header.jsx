@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { memo, useState } from "react";
 import { NavLink } from "react-router-dom";
 import HeaderLink from "../header/HeaderLink";
 import HeaderHamburger from "../header/HeaderHamburger";
@@ -59,4 +59,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);

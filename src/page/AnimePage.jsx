@@ -1,4 +1,4 @@
-import AnimeList from "../components/anime/AnimeList";
+import { AnimeList } from "../components";
 
 const AnimePage = () => {
   return (

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import IconStar from "../icons/IconStar";
 import IconFavorite from "../icons/IconFavorite";
 import Button from "../buttons/Button";
+import { memo } from "react";
 
 const AnimeItem = ({ anime }) => {
   const navigate = useNavigate();
@@ -39,4 +40,4 @@ const AnimeItem = ({ anime }) => {
   );
 };
 
-export default AnimeItem;
+export default memo(AnimeItem);

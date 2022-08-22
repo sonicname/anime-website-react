@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const IconUserGroup = ({ className }) => {
   return (
     <svg
@@ -11,4 +13,4 @@ const IconUserGroup = ({ className }) => {
   );
 };
 
-export default IconUserGroup;
+export default memo(IconUserGroup);

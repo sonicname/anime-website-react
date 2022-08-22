@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const LoadingSkeleton = ({ className, width, height, radius }) => {
   return (
     <div
@@ -11,4 +13,4 @@ const LoadingSkeleton = ({ className, width, height, radius }) => {
   );
 };
 
-export default LoadingSkeleton;
+export default memo(LoadingSkeleton);

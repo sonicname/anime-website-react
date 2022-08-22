@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const IconEmail = ({ className }) => {
   return (
     <svg
@@ -17,4 +19,4 @@ const IconEmail = ({ className }) => {
   );
 };
 
-export default IconEmail;
+export default memo(IconEmail);

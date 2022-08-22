@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const IconRank = ({ className }) => {
   return (
     <svg
@@ -15,4 +17,4 @@ const IconRank = ({ className }) => {
   );
 };
 
-export default IconRank;
+export default memo(IconRank);

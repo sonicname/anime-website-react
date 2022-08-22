@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import Button from "../components/buttons/Button";
+
 import errorImg from "../images/404.png";
+import { Button } from "../components";
 
 const Error404Page = () => {
   const navigate = useNavigate();

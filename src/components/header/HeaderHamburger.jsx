@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const HeaderHamburger = ({ show }) => {
   return (
     <>
@@ -20,4 +22,4 @@ const HeaderHamburger = ({ show }) => {
   );
 };
 
-export default HeaderHamburger;
+export default memo(HeaderHamburger);

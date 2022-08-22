@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const LoadingComponent = () => {
   return (
     <div className="fixed inset-0 w-screen h-screen bg-gray-400 flex items-center justify-center">
@@ -23,4 +25,4 @@ const LoadingComponent = () => {
   );
 };
 
-export default LoadingComponent;
+export default memo(LoadingComponent);

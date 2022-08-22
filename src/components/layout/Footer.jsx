@@ -1,5 +1,6 @@
 import IconEmail from "../icons/IconEmail";
 import IconPhone from "../icons/IconPhone";
+import { memo } from "react";
 
 const Footer = () => {
   return (
@@ -32,4 +33,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default memo(Footer);

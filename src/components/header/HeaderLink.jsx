@@ -1,8 +1,9 @@
 import { NavLink } from "react-router-dom";
+import { memo } from "react";
 
 const HeaderLink = ({ to, setShow, children }) => {
   return (
-    <li className="p-3 font-semibold">
+    <li className="m-3 font-semibold w-full lg:w-auto">
       <NavLink
         className={({ isActive }) =>
           `p-3 ${isActive && "bg-green-500"} text-white rounded-lg`
@@ -16,4 +17,4 @@ const HeaderLink = ({ to, setShow, children }) => {
   );
 };
 
-export default HeaderLink;
+export default memo(HeaderLink);

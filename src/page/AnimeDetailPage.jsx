@@ -1,17 +1,18 @@
 import { useNavigate, useParams } from "react-router-dom";
 
-import DetailStatus from "../components/anime-details/DetailStatus";
-import IconStar from "../components/icons/IconStar";
-import IconUserGroup from "../components/icons/IconUserGroup";
-import IconFavorite from "../components/icons/IconFavorite";
-import IconRank from "../components/icons/IconRank";
-
 import { getRating } from "../utils/getRating";
-import DetailListItem from "../components/anime-details/DetailListItem";
-import LoadingComponent from "../components/loading/LoadingComponent";
 import { useQuery } from "@tanstack/react-query";
 import { getAnimeDetail } from "../apis/apis";
 import { toast } from "react-toastify";
+import {
+  DetailListItem,
+  DetailStatus,
+  IconFavorite,
+  IconRank,
+  IconStar,
+  IconUserGroup,
+  LoadingComponent,
+} from "../components";
 
 const AnimeDetailPage = () => {
   const { animeID } = useParams();

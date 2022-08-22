@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const IconPhone = ({ className }) => {
   return (
     <svg
@@ -17,4 +19,4 @@ const IconPhone = ({ className }) => {
   );
 };
 
-export default IconPhone;
+export default memo(IconPhone);

@@ -5,6 +5,7 @@ import { getListAnime } from "../../apis/apis";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { memo } from "react";
 
 const AnimeList = ({ type }) => {
   const { data, isError, isLoading } = useQuery(["list-anime", type], () =>
@@ -39,4 +40,4 @@ const AnimeList = ({ type }) => {
   );
 };
 
-export default AnimeList;
+export default memo(AnimeList);

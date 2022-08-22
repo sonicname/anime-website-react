@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 import { NavLink } from "react-router-dom";
 
 const DetailListItem = ({ items, title }) => {
@@ -18,4 +18,4 @@ const DetailListItem = ({ items, title }) => {
   );
 };
 
-export default DetailListItem;
+export default memo(DetailListItem);

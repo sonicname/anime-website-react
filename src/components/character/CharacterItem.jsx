@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 import { useNavigate } from "react-router-dom";
 import IconFavorite from "../icons/IconFavorite";
 import Button from "../buttons/Button";
@@ -32,4 +32,4 @@ const CharacterItem = ({ character }) => {
   );
 };
 
-export default CharacterItem;
+export default memo(CharacterItem);

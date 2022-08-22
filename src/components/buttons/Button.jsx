@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const Button = ({ className = "", onClick = () => {}, children }) => {
   return (
     <button
@@ -9,4 +11,4 @@ const Button = ({ className = "", onClick = () => {}, children }) => {
   );
 };
 
-export default Button;
+export default memo(Button);

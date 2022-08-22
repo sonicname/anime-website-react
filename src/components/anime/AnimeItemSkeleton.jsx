@@ -1,6 +1,7 @@
 import IconStar from "../icons/IconStar";
 import IconFavorite from "../icons/IconFavorite";
 import LoadingSkeleton from "../loading/LoadingSkeleton";
+import { memo } from "react";
 
 const AnimeItemSkeleton = () => {
   return (
@@ -31,4 +32,4 @@ const AnimeItemSkeleton = () => {
   );
 };
 
-export default AnimeItemSkeleton;
+export default memo(AnimeItemSkeleton);

@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const IconStar = ({ className }) => {
   return (
     <svg
@@ -11,4 +13,4 @@ const IconStar = ({ className }) => {
   );
 };
 
-export default IconStar;
+export default memo(IconStar);

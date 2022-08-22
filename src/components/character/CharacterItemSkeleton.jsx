@@ -1,3 +1,4 @@
+import { memo } from "react";
 import LoadingSkeleton from "../loading/LoadingSkeleton";
 import IconFavorite from "../icons/IconFavorite";
 
@@ -22,4 +23,4 @@ const CharacterItemSkeleton = () => {
   );
 };
 
-export default CharacterItemSkeleton;
+export default memo(CharacterItemSkeleton);

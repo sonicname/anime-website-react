@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const DetailStatus = ({ type, content, className }) => {
   return (
     <span className={`flex gap-x-2 ${className}`}>
@@ -7,4 +9,4 @@ const DetailStatus = ({ type, content, className }) => {
   );
 };
 
-export default DetailStatus;
+export default memo(DetailStatus);

@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const IconFavorite = ({ className }) => {
   return (
     <svg
@@ -15,4 +17,4 @@ const IconFavorite = ({ className }) => {
   );
 };
 
-export default IconFavorite;
+export default memo(IconFavorite);

@@ -1,11 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-
-import IconFavorite from "../components/icons/IconFavorite";
-import IconEmail from "../components/icons/IconEmail";
-import LoadingComponent from "../components/loading/LoadingComponent";
-import { getCharacterDetail } from "../apis/apis";
 import { toast } from "react-toastify";
+
+import { getCharacterDetail } from "../apis/apis";
+import { IconEmail, IconFavorite, LoadingComponent } from "../components";
 
 const CharacterDetailPage = () => {
   const navigate = useNavigate();
