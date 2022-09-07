@@ -1,8 +1,9 @@
-import { useNavigate } from "react-router-dom";
-import IconStar from "../icons/IconStar";
-import IconFavorite from "../icons/IconFavorite";
-import Button from "../buttons/Button";
-import { memo } from "react";
+import { useNavigate } from 'react-router-dom';
+import { memo } from 'react';
+
+import IconStar from '../icons/IconStar';
+import IconFavorite from '../icons/IconFavorite';
+import Button from '../buttons/Button';
 
 const AnimeItem = ({ anime }) => {
   const navigate = useNavigate();
@@ -21,16 +22,14 @@ const AnimeItem = ({ anime }) => {
         <h3 className="text-md font-semibold">{title}</h3>
         <div className="flex items-center justify-between mt-auto">
           <div className="flex items-center gap-x-1">
-            <span className="text-sm opacity-80">{score || "0"}</span>
+            <span className="text-sm opacity-80">{score || '0'}</span>
 
-            <IconStar
-              className={"h-[16px] w-[16px] flex items-center text-yellow-300"}
-            />
+            <IconStar className={'h-[16px] w-[16px] flex items-center text-yellow-300'} />
           </div>
 
           <div className="flex items-center gap-x-1">
-            <span className="text-sm opacity-80">{favorites || "0"}</span>
-            <IconFavorite className={"h-[16px] w-[16px] text-red-500"} />
+            <span className="text-sm opacity-80">{favorites || '0'}</span>
+            <IconFavorite className={'h-[16px] w-[16px] text-red-500'} />
           </div>
         </div>
 

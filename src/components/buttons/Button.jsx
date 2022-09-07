@@ -1,6 +1,6 @@
-import { memo } from "react";
+import { memo } from 'react';
 
-const Button = ({ className = "", onClick = () => {}, children }) => {
+const Button = ({ className = '', onClick = () => {}, children }) => {
   return (
     <button
       onClick={onClick}

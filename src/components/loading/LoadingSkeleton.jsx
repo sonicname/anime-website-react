@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo } from 'react';
 
 const LoadingSkeleton = ({ className, width, height, radius }) => {
   return (
@@ -6,7 +6,7 @@ const LoadingSkeleton = ({ className, width, height, radius }) => {
       className={`skeleton ${className}`}
       style={{
         height: height,
-        width: width || "100%",
+        width: width || '100%',
         borderRadius: radius,
       }}
     />

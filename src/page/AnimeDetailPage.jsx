@@ -1,9 +1,10 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from 'react-router-dom';
 
-import { getRating } from "../utils/getRating";
-import { useQuery } from "@tanstack/react-query";
-import { getAnimeDetail } from "../apis/apis";
-import { toast } from "react-toastify";
+import { getRating } from '../utils/getRating';
+import { useQuery } from '@tanstack/react-query';
+import { getAnimeDetail } from '../apis/apis';
+import { toast } from 'react-toastify';
+
 import {
   DetailListItem,
   DetailStatus,
@@ -12,19 +13,20 @@ import {
   IconStar,
   IconUserGroup,
   LoadingComponent,
-} from "../components";
+} from '../components';
 
 const AnimeDetailPage = () => {
   const { animeID } = useParams();
   const navigate = useNavigate();
 
-  const { data, error, isLoading } = useQuery(["anime", animeID], () =>
-    getAnimeDetail(animeID)
+  const { data, error, isLoading } = useQuery(
+    ['anime', animeID],
+    () => getAnimeDetail(animeID)
   );
 
   if (error) {
-    toast.error("Something went wrong! Please try again!");
-    return navigate("/");
+    toast.error('Something went wrong! Please try again!');
+    return navigate('/');
   }
   if (isLoading) return <LoadingComponent />;
 
@@ -64,10 +66,13 @@ const AnimeDetailPage = () => {
               </a>
             </div>
             <div className="flex flex-col gap-y-3">
-              <div id="anime-details" className="flex flex-col gap-y-5">
+              <div
+                id="anime-details"
+                className="flex flex-col gap-y-5"
+              >
                 <div className="flex flex-col gap-y-[4px]">
                   <h2 className="font-bold text-2xl">
-                    {title} ({year || "Empty year"})
+                    {title} ({year || 'Empty year'})
                   </h2>
                   <h3 className="opacity-75 text-sm">
                     {title_japanese} - {`Rank: ${rank}`}
@@ -77,73 +82,90 @@ const AnimeDetailPage = () => {
                 <div className="flex flex-col">
                   <div className="flex items-center gap-x-4">
                     <div className="flex items-center gap-x-1">
-                      <IconRank className={"h-5 w-5 text-cyan-400"} />
-                      <span className="font-semibold">{rank || "null"}</span>
+                      <IconRank className={'h-5 w-5 text-cyan-400'} />
+                      <span className="font-semibold">
+                        {rank || 'null'}
+                      </span>
                     </div>
 
                     <div className="flex items-center gap-x-1">
-                      <span className="font-semibold">{score || "0"}</span>
-                      <IconStar className={"h-5 w-5 text-yellow-300"} />
+                      <span className="font-semibold">
+                        {score || '0'}
+                      </span>
+                      <IconStar
+                        className={'h-5 w-5 text-yellow-300'}
+                      />
                     </div>
 
                     <div className="flex items-center gap-x-1">
-                      <span className="font-semibold">{favorites || "0"}</span>
-                      <IconFavorite className={"h-5 w-5 text-red-500"} />
+                      <span className="font-semibold">
+                        {favorites || '0'}
+                      </span>
+                      <IconFavorite
+                        className={'h-5 w-5 text-red-500'}
+                      />
                     </div>
 
                     <div className="flex items-center gap-x-1">
-                      <span className="font-semibold">{members || "0"}</span>
-                      <IconUserGroup className={"h-5 w-5 text-blue-400"} />
+                      <span className="font-semibold">
+                        {members || '0'}
+                      </span>
+                      <IconUserGroup
+                        className={'h-5 w-5 text-blue-400'}
+                      />
                     </div>
                   </div>
                 </div>
 
                 {genres.length > 0 && (
-                  <DetailListItem items={genres} title={"Genres"} />
+                  <DetailListItem items={genres} title={'Genres'} />
                 )}
 
                 <div className="flex flex-wrap gap-3">
                   <DetailStatus
-                    type={"Rating"}
+                    type={'Rating'}
                     content={getRating(rating)}
                     className="text-sm"
                   />
                   <DetailStatus
-                    type={"Status"}
+                    type={'Status'}
                     content={status}
                     className="text-sm"
                   />
 
                   <DetailStatus
-                    type={"Duration"}
-                    content={duration || "Unknown"}
+                    type={'Duration'}
+                    content={duration || 'Unknown'}
                     className="text-sm"
                   />
                 </div>
 
                 <div className="flex flex-wrap gap-3">
                   <DetailStatus
-                    type={"Type"}
+                    type={'Type'}
                     content={type}
                     className="text-sm"
                   />
                   <DetailStatus
-                    type={"Source"}
-                    content={source || "Unknown"}
+                    type={'Source'}
+                    content={source || 'Unknown'}
                     className="text-sm"
                   />
                   <DetailStatus
-                    type={"Episodes"}
-                    content={episodes || "Unknown"}
+                    type={'Episodes'}
+                    content={episodes || 'Unknown'}
                     className="text-sm"
                   />
                 </div>
               </div>
 
-              <div id="anime-content" className="text-md text-gray-300">
+              <div
+                id="anime-content"
+                className="text-md text-gray-300"
+              >
                 <p className="text-justify">
                   <span className="font-semibold text-white">
-                    Description:{" "}
+                    Description:{' '}
                   </span>
                   <span className="text-sm">
                     {synopsis || "Description's empty"}

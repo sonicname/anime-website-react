@@ -1,4 +1,4 @@
-export const getRating = (rating = "") => {
-  if (!rating) return "";
-  return rating.split(" ")[0];
+export const getRating = (rating = '') => {
+  if (!rating) return '';
+  return rating.split(' ')[0];
 };

@@ -1,16 +1,20 @@
-import { v4 } from "uuid";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
-import InfiniteScroll from "react-infinite-scroller";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { v4 } from 'uuid';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { search } from "../apis/apis";
-import { AnimeItem, AnimeItemSkeleton, CharacterItem } from "../components";
+import { search } from '../apis/apis';
+import {
+  AnimeItem,
+  AnimeItemSkeleton,
+  CharacterItem,
+} from '../components';
 
 const SearchPage = ({ type }) => {
   const navigate = useNavigate();
-  const [query, setQuery] = useState("naruto");
+  const [query, setQuery] = useState('naruto');
   const inputRef = useRef(null);
   const searchBtnRef = useRef(null);
 
@@ -35,21 +39,21 @@ const SearchPage = ({ type }) => {
   );
 
   if (isError) {
-    toast.error("Something went wrong! Please try again!");
-    return navigate("/");
+    toast.error('Something went wrong! Please try again!');
+    return navigate('/');
   }
 
   useEffect(() => {
     const handlerEnterKeyPress = (e) => {
-      if (e.code === "Enter") {
+      if (e.code === 'Enter') {
         setQuery(inputRef.current.value);
       }
     };
 
-    document.addEventListener("keyup", handlerEnterKeyPress);
+    document.addEventListener('keyup', handlerEnterKeyPress);
 
     return () => {
-      document.removeEventListener("keyup", handlerEnterKeyPress);
+      document.removeEventListener('keyup', handlerEnterKeyPress);
     };
   }, []);
 
@@ -81,13 +85,16 @@ const SearchPage = ({ type }) => {
               ))}
             </div>
           )}
-          <InfiniteScroll loadMore={fetchNextPage} hasMore={hasNextPage}>
+          <InfiniteScroll
+            loadMore={fetchNextPage}
+            hasMore={hasNextPage}
+          >
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {!isLoading &&
                 data.pages.map((pageData) =>
                   pageData.data.map((item) => (
                     <>
-                      {type === "anime" ? (
+                      {type === 'anime' ? (
                         <AnimeItem anime={item} key={v4()} />
                       ) : (
                         <CharacterItem character={item} key={v4()} />
@@ -95,13 +102,7 @@ const SearchPage = ({ type }) => {
                     </>
                   ))
                 )}
-              {isFetchingNextPage && (
-                <>
-                  {new Array(4).fill(0).map(() => (
-                    <AnimeItemSkeleton key={v4()} />
-                  ))}
-                </>
-              )}
+              {isFetchingNextPage && <AnimeItemSkeleton key={v4()} />}
             </div>
           </InfiniteScroll>
         </div>

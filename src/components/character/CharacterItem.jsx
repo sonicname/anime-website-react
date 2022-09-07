@@ -1,7 +1,7 @@
-import { memo } from "react";
-import { useNavigate } from "react-router-dom";
-import IconFavorite from "../icons/IconFavorite";
-import Button from "../buttons/Button";
+import { memo } from 'react';
+import Button from '../buttons/Button';
+import { useNavigate } from 'react-router-dom';
+import IconFavorite from '../icons/IconFavorite';
 
 const CharacterItem = ({ character }) => {
   const navigate = useNavigate();
@@ -19,8 +19,12 @@ const CharacterItem = ({ character }) => {
         <h3 className="text-md font-semibold">{name}</h3>
         <div className="flex mt-auto justify-end">
           <div className="flex gap-x-1">
-            <span className="text-sm opacity-80">{favorites || "0"}</span>
-            <IconFavorite className={"h-[16px] w-[16px] text-red-500"} />
+            <span className="text-sm opacity-80">
+              {favorites || '0'}
+            </span>
+            <IconFavorite
+              className={'h-[16px] w-[16px] text-red-500'}
+            />
           </div>
         </div>
 
