@@ -25,20 +25,18 @@ const Header = () => {
   const [show, setShow] = useState(false);
 
   return (
-    <header className="w-full bg-slate-900 text-white top-0 sticky select-none z-50">
-      <div className="page-container flex items-center justify-between relative z-10">
+    <header className='w-full bg-slate-900 text-white top-0 sticky select-none z-50'>
+      <div className='page-container flex items-center justify-between relative z-10'>
         <NavLink
-          className={({ isActive }) =>
-            `p-3 ${isActive && 'bg-green-500'} text-white rounded-lg`
-          }
+          className={({ isActive }) => `p-3 ${isActive && 'bg-green-500'} text-white rounded-lg`}
           to={'/'}
         >
-          <h1 className="font-bold text-xl">Home</h1>
+          <h1 className='font-bold text-xl'>Home</h1>
         </NavLink>
 
         <div
           onClick={() => setShow(!show)}
-          className="h-8 w-[40px] flex flex-col items-center justify-between lg:hidden z-10"
+          className='h-8 w-[40px] flex flex-col items-center justify-between lg:hidden z-10'
         >
           <HeaderHamburger show={show} />
         </div>
