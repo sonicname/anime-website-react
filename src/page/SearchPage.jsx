@@ -65,7 +65,7 @@ const SearchPage = ({ type }) => {
 
         <div className='text-white mt-4'>
           {isLoading && (
-            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-4'>
               {new Array(4).fill(0).map(() => (
                 <AnimeItemSkeleton key={v4()} />
               ))}
