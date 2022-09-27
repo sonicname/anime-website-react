@@ -1,5 +1,6 @@
 import { memo, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+
 import HeaderLink from '../header/HeaderLink';
 import HeaderHamburger from '../header/HeaderHamburger';
 
@@ -25,13 +26,15 @@ const Header = () => {
   const [show, setShow] = useState(false);
 
   return (
-    <header className='w-full bg-slate-900 text-white top-0 sticky select-none z-50'>
-      <div className='page-container flex items-center justify-between relative z-10'>
+    <header className='sticky top-0 z-50 w-full text-white select-none bg-slate-900'>
+      <div className='relative z-10 flex items-center justify-between page-container'>
         <NavLink
-          className={({ isActive }) => `p-3 ${isActive && 'bg-green-500'} text-white rounded-lg`}
+          className={({ isActive }) =>
+            `p-3 ${isActive && 'bg-green-500'} text-white rounded-lg`
+          }
           to={'/'}
         >
-          <h1 className='font-bold text-xl'>Home</h1>
+          <h1 className='text-xl font-bold'>Home</h1>
         </NavLink>
 
         <div

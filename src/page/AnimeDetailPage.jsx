@@ -1,9 +1,7 @@
+import { toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { getRating } from '../utils/getRating';
-import { useQuery } from '@tanstack/react-query';
-import { getAnimeDetail } from '../apis/apis';
-import { toast } from 'react-toastify';
 
 import {
   DetailListItem,
@@ -15,16 +13,19 @@ import {
   LoadingComponent,
 } from '../components';
 
+import useGetAnimeDetail from '../hooks/useGetAnimeDetail';
+
 const AnimeDetailPage = () => {
   const { animeID } = useParams();
   const navigate = useNavigate();
 
-  const { data, error, isLoading } = useQuery(['anime', animeID], () => getAnimeDetail(animeID));
+  const { data, error, isLoading } = useGetAnimeDetail(animeID);
 
   if (error) {
     toast.error('Something went wrong! Please try again!');
     return navigate('/');
   }
+
   if (isLoading) return <LoadingComponent />;
 
   const {
@@ -52,23 +53,23 @@ const AnimeDetailPage = () => {
     <div className='page-container'>
       {data && (
         <div>
-          <div className='text-white grid grid-cols-1 gap-5 md:grid-cols-2'>
+          <div className='grid grid-cols-1 gap-5 text-white md:grid-cols-2'>
             <div className='max-w-[800px] max-h-[600px] mx-auto rounded-lg'>
               <a target='_blank' href={url}>
                 <img
                   src={images.jpg.large_image_url}
                   alt=''
-                  className='h-full w-full object-cover rounded-lg'
+                  className='object-cover w-full h-full rounded-lg'
                 />
               </a>
             </div>
             <div className='flex flex-col gap-y-3'>
               <div id='anime-details' className='flex flex-col gap-y-5'>
                 <div className='flex flex-col gap-y-[4px]'>
-                  <h2 className='font-bold text-2xl'>
+                  <h2 className='text-2xl font-bold'>
                     {title} ({year || 'Empty year'})
                   </h2>
-                  <h3 className='opacity-75 text-sm'>
+                  <h3 className='text-sm opacity-75'>
                     {title_japanese} - {`Rank: ${rank}`}
                   </h3>
                 </div>
@@ -97,11 +98,21 @@ const AnimeDetailPage = () => {
                   </div>
                 </div>
 
-                {genres.length > 0 && <DetailListItem items={genres} title={'Genres'} />}
+                {genres.length > 0 && (
+                  <DetailListItem items={genres} title={'Genres'} />
+                )}
 
                 <div className='flex flex-wrap gap-3'>
-                  <DetailStatus type={'Rating'} content={getRating(rating)} className='text-sm' />
-                  <DetailStatus type={'Status'} content={status} className='text-sm' />
+                  <DetailStatus
+                    type={'Rating'}
+                    content={getRating(rating)}
+                    className='text-sm'
+                  />
+                  <DetailStatus
+                    type={'Status'}
+                    content={status}
+                    className='text-sm'
+                  />
 
                   <DetailStatus
                     type={'Duration'}
@@ -111,8 +122,16 @@ const AnimeDetailPage = () => {
                 </div>
 
                 <div className='flex flex-wrap gap-3'>
-                  <DetailStatus type={'Type'} content={type} className='text-sm' />
-                  <DetailStatus type={'Source'} content={source || 'Unknown'} className='text-sm' />
+                  <DetailStatus
+                    type={'Type'}
+                    content={type}
+                    className='text-sm'
+                  />
+                  <DetailStatus
+                    type={'Source'}
+                    content={source || 'Unknown'}
+                    className='text-sm'
+                  />
                   <DetailStatus
                     type={'Episodes'}
                     content={episodes || 'Unknown'}
@@ -121,10 +140,14 @@ const AnimeDetailPage = () => {
                 </div>
               </div>
 
-              <div id='anime-content' className='text-md text-gray-300'>
+              <div id='anime-content' className='text-gray-300 text-md'>
                 <p className='text-justify'>
-                  <span className='font-semibold text-white'>Description: </span>
-                  <span className='text-sm'>{synopsis || "Description's empty"}</span>
+                  <span className='font-semibold text-white'>
+                    Description:{' '}
+                  </span>
+                  <span className='text-sm'>
+                    {synopsis || "Description's empty"}
+                  </span>
                 </p>
               </div>
             </div>

@@ -1,15 +1,19 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import AnimeItem from './AnimeItem';
-import AnimeItemSkeleton from './AnimeItemSkeleton';
-import { getListAnime } from '../../apis/apis';
-import { useQuery } from '@tanstack/react-query';
+import { memo } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { memo } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import { getListAnime } from '../../apis/apis';
+
+import AnimeItem from './AnimeItem';
+import AnimeItemSkeleton from './AnimeItemSkeleton';
 
 const AnimeList = ({ type }) => {
-  const { data, isError, isLoading } = useQuery(['list-anime', type], () => getListAnime(type));
   const navigate = useNavigate();
+  const { data, isError, isLoading } = useQuery(['list-anime', { type }], () =>
+    getListAnime(type),
+  );
 
   if (isError) {
     toast.error('Something went wrong! Please try again!');
@@ -20,7 +24,7 @@ const AnimeList = ({ type }) => {
     <div className='anime-list'>
       <Swiper grabCursor={'true'} spaceBetween={20} slidesPerView={'auto'}>
         {isLoading &&
-          new Array(10).fill(0).map((item, index) => (
+          new Array(10).fill(0).map((_, index) => (
             <SwiperSlide key={index}>
               <AnimeItemSkeleton />
             </SwiperSlide>

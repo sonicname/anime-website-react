@@ -1,42 +1,42 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-
-import { getCharacterDetail } from '../apis/apis';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { IconEmail, IconFavorite, LoadingComponent } from '../components';
+
+import useGetCharacterDetail from '../hooks/useGetCharacterDetail';
 
 const CharacterDetailPage = () => {
   const navigate = useNavigate();
   const { characterID } = useParams();
-  const { data, isError, isLoading } = useQuery(['character', characterID], () =>
-    getCharacterDetail(characterID)
-  );
+  const { data, isError, isLoading } = useGetCharacterDetail(characterID);
+
   if (isError) {
     toast.error('Something went wrong! Please try again!');
     return navigate('/');
   }
+
   if (isLoading) return <LoadingComponent />;
 
-  const { images, name, name_kanji, nicknames, favorites, about, url } = data.data;
+  const { images, name, name_kanji, nicknames, favorites, about, url } =
+    data.data;
 
   return (
     <div className='page-container'>
       {data && (
         <div>
-          <div className='text-white grid grid-cols-1 gap-5 md:grid-cols-2'>
+          <div className='grid grid-cols-1 gap-5 text-white md:grid-cols-2'>
             <div className='max-w-[800px] max-h-[600px] mx-auto rounded-lg'>
               <a target='_blank' href={url}>
                 <img
                   src={images.jpg.image_url}
                   alt=''
-                  className='h-full w-full object-cover rounded-lg'
+                  className='object-cover w-full h-full rounded-lg'
                 />
               </a>
             </div>
             <div className='flex flex-col gap-y-3'>
               <div id='anime-details' className='flex flex-col gap-y-5'>
-                <h2 className='font-bold text-2xl'>
+                <h2 className='text-2xl font-bold'>
                   {name} ({name_kanji || 'empty japanese name'})
                 </h2>
 
@@ -53,10 +53,12 @@ const CharacterDetailPage = () => {
                 </div>
               </div>
 
-              <div id='anime-content' className='text-md text-gray-300'>
+              <div id='anime-content' className='text-gray-300 text-md'>
                 <p className='text-justify'>
                   <span className='font-semibold text-white'>About: </span>
-                  <span className='text-sm'>{about || "Description's empty"}</span>
+                  <span className='text-sm'>
+                    {about || "Description's empty"}
+                  </span>
                 </p>
               </div>
             </div>

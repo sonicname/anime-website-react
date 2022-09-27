@@ -1,28 +1,30 @@
 import { v4 } from 'uuid';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
-import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { search } from '../apis/apis';
 import { AnimeItem, AnimeItemSkeleton, CharacterItem } from '../components';
+
+import useSearchAnime from '../hooks/useSearchAnime';
 
 const SearchPage = ({ type }) => {
   const navigate = useNavigate();
   const [query, setQuery] = useState('naruto');
+
   const inputRef = useRef(null);
   const searchBtnRef = useRef(null);
 
   const url = `https://api.jikan.moe/v4/${type}?q=${query}`;
 
-  const { data, hasNextPage, fetchNextPage, isError, isLoading, isFetchingNextPage } =
-    useInfiniteQuery([`search-${type}`, query], ({ pageParam = url }) => search(pageParam), {
-      getNextPageParam: (lastPage, _) =>
-        lastPage.pagination.has_next_page
-          ? `${url}&page=${lastPage.pagination.current_page + 1}`
-          : undefined,
-    });
+  const {
+    data,
+    hasNextPage,
+    fetchNextPage,
+    isError,
+    isLoading,
+    isFetchingNextPage,
+  } = useSearchAnime(type, query, url);
 
   if (isError) {
     toast.error('Something went wrong! Please try again!');
@@ -44,12 +46,12 @@ const SearchPage = ({ type }) => {
   }, []);
 
   return (
-    <div className='page-container w-full'>
+    <div className='w-full page-container'>
       <div className='flex flex-col gap-y-4'>
-        <div className='w-full relative'>
+        <div className='relative w-full'>
           <input
             type='text'
-            className='p-3 w-full font-semibold outline-none rounded-md'
+            className='w-full p-3 font-semibold rounded-md outline-none'
             placeholder='Enter your keyword'
             ref={inputRef}
             defaultValue={query}
@@ -57,33 +59,33 @@ const SearchPage = ({ type }) => {
           <button
             ref={searchBtnRef}
             onClick={() => setQuery(inputRef.current.value)}
-            className='p-3 absolute top-0 right-0 bottom-0 bg-purple-600 text-white font-semibold hover:opacity-75 duration-300 active:scale-90 rounded-r-md'
+            className='absolute top-0 bottom-0 right-0 p-3 font-semibold text-white duration-300 bg-purple-600 hover:opacity-75 active:scale-90 rounded-r-md'
           >
             Search
           </button>
         </div>
 
-        <div className='text-white mt-4'>
+        <div className='mt-4 text-white'>
           {isLoading && (
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-4'>
+            <div className='grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4 md:gap-4 lg:gap-4'>
               {new Array(4).fill(0).map(() => (
                 <AnimeItemSkeleton key={v4()} />
               ))}
             </div>
           )}
           <InfiniteScroll loadMore={fetchNextPage} hasMore={hasNextPage}>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-4'>
+            <div className='grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4 md:gap-4 lg:gap-4'>
               {!isLoading &&
                 data.pages.map((pageData) =>
                   pageData.data.map((item) => (
                     <>
                       {type === 'anime' ? (
-                        <AnimeItem anime={item} key={v4()} />
+                        <AnimeItem anime={item} key={item.mal_id} />
                       ) : (
-                        <CharacterItem character={item} key={v4()} />
+                        <CharacterItem character={item} key={item.mal_id} />
                       )}
                     </>
-                  ))
+                  )),
                 )}
               {isFetchingNextPage && <AnimeItemSkeleton key={v4()} />}
             </div>

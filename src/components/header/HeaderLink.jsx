@@ -1,11 +1,13 @@
-import { NavLink } from 'react-router-dom';
 import { memo } from 'react';
+import { NavLink } from 'react-router-dom';
 
 const HeaderLink = ({ to, setShow, children }) => {
   return (
-    <li className='m-3 font-semibold w-full lg:w-auto'>
+    <li className='w-full m-3 font-semibold lg:w-auto'>
       <NavLink
-        className={({ isActive }) => `p-3 ${isActive && 'bg-green-500'} text-white rounded-lg`}
+        className={({ isActive }) =>
+          `p-3 ${isActive && 'bg-green-500'} text-white rounded-lg`
+        }
         to={to}
         onClick={() => setShow(false)}
       >
