@@ -1,19 +1,15 @@
 import { memo } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-import { getListAnime } from '../../apis/apis';
 
 import AnimeItem from './AnimeItem';
 import AnimeItemSkeleton from './AnimeItemSkeleton';
+import useGetAnimeList from '../../hooks/useGetAnimeList';
 
 const AnimeList = ({ type }) => {
   const navigate = useNavigate();
-  const { data, isError, isLoading } = useQuery(['list-anime', { type }], () =>
-    getListAnime(type),
-  );
+  const { data, isError, isLoading } = useGetAnimeList(type);
 
   if (isError) {
     toast.error('Something went wrong! Please try again!');
